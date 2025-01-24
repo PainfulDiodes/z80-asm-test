@@ -1,1 +1,1 @@
-    DB "Hello"
+    DB "bar",0

@@ -11,14 +11,18 @@
 10    0101
 fail.asm(11): error: Label not found: msb
 fail.asm(11): error: Unexpected: ($)
-11    0101 00               db msb($)       ; not supported - use high()
+11    0101 00               db msb($)       ; not supported - use high() instead
 fail.asm(12): error: Label not found: lsb
 fail.asm(12): error: Unexpected: ($)
-12    0102 00               db lsb($)       ; not supported - use low()
+12    0102 00               db lsb($)       ; not supported - use low() instead
 13    0103
 fail.asm(14): error: Unrecognized instruction: cstr "foo"
-14    0103                  cstr "foo"      ; c-style strings are not recognised
+14    0103                  cstr "foo"      ; cstr not recognised for c-style strings - use db str,0
 15    0103
-fail.asm(16): error: Unrecognized instruction: included.asm
-16    0103              .include included.asm ; by default directives cannot be put at the start of a line fo this will fail
+16    0103 00 00 00...      align $100
+17    0200
+fail.asm(18): error: Unrecognized instruction: included.asm
+18    0200              .include included.asm   ; by default directives cannot be put at the start of a line so this will fail.
+19    0200                                      ; use the --dirbol command switch to make this acceptable
+20    0200
 # file closed: fail.asm
