@@ -8,37 +8,38 @@
  7    0000 ~                     ORG addr
  8    0000                  ENDM
  9    0000
-10    0000 C3 00 01         jp START
-11    0003
-12    0003                  PADORG $100     ; BLOCK is needed to pad out memory (ALIGN might also be used)
-12    0003             >         IF $ < $100
-12    0003 00 00 00... >         BLOCK $100-$
-12    0100             >         ENDIF
-12    0100             >         ORG $100
-13    0100                  ORG $100        ; ORG on its own will not align code with position in memory
-14    0100
-15    0100              START:
-16    0100 C3 00 03         jp END
-17    0103
-18    0103 01               db high($)      ; high byte of the current PC
-19    0104 04               db low($)       ; low byte of the current PC
-20    0105
-21    0105 66 6F 6F 00      db "foo",0      ; c-style strings using DB
-22    0109
-23    0109 00 00 00...      align $100      ; pad to beginning of next memory page
-24    0200
-25    0200                  .include included.asm       ; directives can start with a . (or not)
+10    0000              SIMPLEPAD: MACRO addr ; macroname MACRO param format is supported (label must be at beginning of line)
+11    0000 ~                    BLOCK addr-$
+12    0000                  ENDM
+13    0000
+14    0000 C3 00 01         jp START
+15    0003
+16    0003                  PADORG $100     ; BLOCK is needed to pad out memory (ALIGN might also be used)
+16    0003             >         IF $ < $100
+16    0003 00 00 00... >         BLOCK $100-$
+16    0100             >         ENDIF
+16    0100             >         ORG $100
+17    0100                  ORG $100        ; ORG on its own will not align code with position in memory
+18    0100
+19    0100              START:
+20    0100 C3 00 03         jp END
+21    0103
+22    0103 01               db high($)      ; high byte of the current PC
+23    0104 04               db low($)       ; low byte of the current PC
+24    0105
+25    0105 66 6F 6F 00      db "foo",0      ; c-style strings using DB
+26    0109
+27    0109 00 00 00...      align $100      ; pad to beginning of next memory page
+28    0200
+29    0200                  .include included.asm       ; directives can start with a . (or not)
 # file opened: included.asm
  1+   0200 62 61 72 00      DB "bar",0
 # file closed: included.asm
-26    0204
-27    0204                  PADORG $300     ; BLOCK is needed to pad out memory (ALIGN might also be used)
-27    0204             >         IF $ < $300
-27    0204 00 00 00... >         BLOCK $300-$
-27    0300             >         ENDIF
-27    0300             >         ORG $300
-28    0300                  ORG $300        ; ORG on its own will not align code with position in memory
-29    0300
-30    0300              END:
-31    0300 76               halt
+30    0204
+31    0204                  SIMPLEPAD $300     ; BLOCK is needed to pad out memory (ALIGN might also be used)
+31    0204 00 00 00... >        BLOCK $300-$
+32    0300                  ORG $300        ; ORG on its own will not align code with position in memory, but multiple orgs are allowed
+33    0300
+34    0300              END:
+35    0300 76               halt
 # file closed: succeed.asm

@@ -7,6 +7,10 @@
          ORG addr
     ENDM        
 
+SIMPLEPAD: MACRO addr
+        BLOCK addr-$
+    ENDM       
+
     jp start        ; labels are case-sensitive
 
     ORG $100        ; ORG on its own will not align code with position in memory
