@@ -1,3 +1,4 @@
+rm _*.{bin,hex,lst}
 sjasmplus --lst=_succeed.lst succeed.asm
 hexdump -C _succeed.bin > _succeed.hex
 sjasmplus --lst=_fail.lst fail.asm
