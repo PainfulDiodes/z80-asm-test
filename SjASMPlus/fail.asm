@@ -13,7 +13,7 @@
                     ; the following will not assemble to $100 in _fail.bin / _fail.hex
 
 START:
-    halt
+    jp END
 
     db msb($)       ; not supported - use high() instead
     db lsb($)       ; not supported - use low() instead
@@ -24,3 +24,6 @@ START:
 
 .include included.asm   ; by default directives cannot be put at the start of a line so this will fail. 
                         ; use the --dirbol command switch to make this acceptable
+
+  END:                  ; labels must generally be placed at the start of the line
+    halt

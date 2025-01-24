@@ -20,22 +20,24 @@ fail.asm(8): error: [ENDM] End macro without macro
 13    0100                                  ; the following will not assemble to $100 in _fail.bin / _fail.hex
 14    0100
 15    0100              START:
-16    0100 76               halt
-17    0101
+fail.asm(16): error: Label not found: END
+16    0100 C3 00 00         jp END
+17    0103
 fail.asm(18): error: Label not found: msb
 fail.asm(18): error: Unexpected: ($)
-18    0101 00               db msb($)       ; not supported - use high() instead
+18    0103 00               db msb($)       ; not supported - use high() instead
 fail.asm(19): error: Label not found: lsb
 fail.asm(19): error: Unexpected: ($)
-19    0102 00               db lsb($)       ; not supported - use low() instead
-20    0103
+19    0104 00               db lsb($)       ; not supported - use low() instead
+20    0105
 fail.asm(21): error: Unrecognized instruction: cstr "foo"
-21    0103                  cstr "foo"      ; cstr not recognised for c-style strings - use db str,0
-22    0103
-23    0103 00 00 00...      align $100
+21    0105                  cstr "foo"      ; cstr not recognised for c-style strings - use db str,0
+22    0105
+23    0105 00 00 00...      align $100
 24    0200
 fail.asm(25): error: Unrecognized instruction: included.asm
 25    0200              .include included.asm   ; by default directives cannot be put at the start of a line so this will fail.
 26    0200                                      ; use the --dirbol command switch to make this acceptable
 27    0200
+28    0200                END
 # file closed: fail.asm

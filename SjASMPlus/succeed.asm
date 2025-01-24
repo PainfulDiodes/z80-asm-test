@@ -13,7 +13,7 @@
     ORG $100        ; ORG on its own will not align code with position in memory
 
 START:
-    halt
+    jp END
 
     db high($)      ; high byte of the current PC
     db low($)       ; low byte of the current PC
@@ -23,3 +23,6 @@ START:
     align $100      ; pad to beginning of next memory page
 
     .include included.asm       ; directives can start with a . (or not)
+
+END:
+    halt

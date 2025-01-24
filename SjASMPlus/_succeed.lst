@@ -18,17 +18,20 @@
 13    0100                  ORG $100        ; ORG on its own will not align code with position in memory
 14    0100
 15    0100              START:
-16    0100 76               halt
-17    0101
-18    0101 01               db high($)      ; high byte of the current PC
-19    0102 02               db low($)       ; low byte of the current PC
-20    0103
-21    0103 66 6F 6F 00      db "foo",0      ; c-style strings using DB
-22    0107
-23    0107 00 00 00...      align $100      ; pad to beginning of next memory page
+16    0100 C3 04 02         jp END
+17    0103
+18    0103 01               db high($)      ; high byte of the current PC
+19    0104 04               db low($)       ; low byte of the current PC
+20    0105
+21    0105 66 6F 6F 00      db "foo",0      ; c-style strings using DB
+22    0109
+23    0109 00 00 00...      align $100      ; pad to beginning of next memory page
 24    0200
 25    0200                  .include included.asm       ; directives can start with a . (or not)
 # file opened: included.asm
  1+   0200 62 61 72 00      DB "bar",0
 # file closed: included.asm
+26    0204
+27    0204              END:
+28    0204 76               halt
 # file closed: succeed.asm
