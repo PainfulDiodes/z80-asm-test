@@ -1,0 +1,20 @@
+# file opened: succeed.asm
+ 1    0000                  output _succeed.bin
+ 2    0000
+ 3    0000 C3 00 01         jp START
+ 4    0003
+ 5    0003 00 00 00...      BLOCK $100-$    ; BLOCK is needed to pad out memory
+ 6    0100                  ORG $100        ; ORG on its own will not align code with position in memory
+ 7    0100
+ 8    0100              START:
+ 9    0100 76               halt
+10    0101
+11    0101 01               db high($)      ; high byte of the current PC
+12    0102 02               db low($)       ; low byte of the current PC
+13    0103
+14    0103                  .include included.asm       ; directives can start with a . (or not)
+# file opened: included.asm
+ 1+   0103 48 65 6C 6C      DB "Hello"
+ 1+   0107 6F
+# file closed: included.asm
+# file closed: succeed.asm
