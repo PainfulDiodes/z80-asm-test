@@ -7,7 +7,7 @@
          ORG addr
     ENDM        
 
-    jp START
+    jp start        ; labels are case-sensitive
 
     ORG $100        ; ORG on its own will not align code with position in memory
                     ; the following will not assemble to $100 in _fail.bin / _fail.hex
