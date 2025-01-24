@@ -27,9 +27,10 @@
 22    0103 01               db high($)      ; high byte of the current PC
 23    0104 04               db low($)       ; low byte of the current PC
 24    0105
-25    0105 66 6F 6F 00      db "foo",0      ; c-style strings using DB
-26    0109
-27    0109 00 00 00...      align $100      ; pad to beginning of next memory page
+25    0105 66 6F 6F 0A      db "foo\n",0      ; c-style strings using DB, escaped control characters allowed
+25    0109 00
+26    010A
+27    010A 00 00 00...      align $100      ; pad to beginning of next memory page
 28    0200
 29    0200                  .include included.asm       ; directives can start with a . (or not)
 # file opened: included.asm

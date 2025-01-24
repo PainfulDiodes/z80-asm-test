@@ -35,8 +35,8 @@ fail.asm(23): error: Label not found: lsb
 fail.asm(23): error: Unexpected: ($)
 23    0104 00               db lsb($)       ; not supported - use low() instead
 24    0105
-fail.asm(25): error: Unrecognized instruction: cstr "foo"
-25    0105                  cstr "foo"      ; cstr not recognised for c-style strings - use db str,0
+fail.asm(25): error: Unrecognized instruction: cstr "foo\n"
+25    0105                  cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
 26    0105
 27    0105 00 00 00...      align $100
 28    0200

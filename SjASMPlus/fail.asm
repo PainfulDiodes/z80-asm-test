@@ -22,7 +22,7 @@ START:
     db msb($)       ; not supported - use high() instead
     db lsb($)       ; not supported - use low() instead
 
-    cstr "foo"      ; cstr not recognised for c-style strings - use db str,0
+    cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
 
     align $100
 

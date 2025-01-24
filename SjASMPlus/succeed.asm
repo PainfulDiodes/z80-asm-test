@@ -22,7 +22,7 @@ START:
     db high($)      ; high byte of the current PC
     db low($)       ; low byte of the current PC
 
-    db "foo",0      ; c-style strings using DB
+    db "foo\n",0      ; c-style strings using DB, escaped control characters allowed
 
     align $100      ; pad to beginning of next memory page
 
