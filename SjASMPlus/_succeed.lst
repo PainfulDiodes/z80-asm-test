@@ -22,25 +22,26 @@
 17    0100                  ORG $100        ; ORG on its own will not align code with position in memory
 18    0100
 19    0100              START:
-20    0100 C3 00 03         jp END
-21    0103
-22    0103 01               db high($)      ; high byte of the current PC
-23    0104 04               db low($)       ; low byte of the current PC
-24    0105
-25    0105 66 6F 6F 0A      db "foo\n",0      ; c-style strings using DB, escaped control characters allowed
-25    0109 00
-26    010A
-27    010A 00 00 00...      align $100      ; pad to beginning of next memory page
-28    0200
-29    0200                  .include included.asm       ; directives can start with a . (or not)
+20    0100 50 59            ld de,bc        ; successfully translates to ld d,b followed by ld e,c [50,59]
+21    0102 C3 00 03         jp END
+22    0105
+23    0105 01               db high($)      ; high byte of the current PC
+24    0106 06               db low($)       ; low byte of the current PC
+25    0107
+26    0107 66 6F 6F 0A      db "foo\n",0      ; c-style strings using DB, escaped control characters allowed
+26    010B 00
+27    010C
+28    010C 00 00 00...      align $100      ; pad to beginning of next memory page
+29    0200
+30    0200                  .include included.asm       ; directives can start with a . (or not)
 # file opened: included.asm
  1+   0200 62 61 72 00      DB "bar",0
 # file closed: included.asm
-30    0204
-31    0204                  SIMPLEPAD $300     ; BLOCK is needed to pad out memory (ALIGN might also be used)
-31    0204 00 00 00... >        BLOCK $300-$
-32    0300                  ORG $300        ; ORG on its own will not align code with position in memory, but multiple orgs are allowed
-33    0300
-34    0300              END:
-35    0300 76               halt
+31    0204
+32    0204                  SIMPLEPAD $300     ; BLOCK is needed to pad out memory (ALIGN might also be used)
+32    0204 00 00 00... >        BLOCK $300-$
+33    0300                  ORG $300        ; ORG on its own will not align code with position in memory, but multiple orgs are allowed
+34    0300
+35    0300              END:
+36    0300 76               halt
 # file closed: succeed.asm

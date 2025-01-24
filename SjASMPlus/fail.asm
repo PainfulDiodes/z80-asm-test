@@ -17,6 +17,7 @@ SIMPLEPAD: MACRO addr
                     ; the following will not assemble to $100 in _fail.bin / _fail.hex
 
 START:
+    ld de,bc
     jp END
 
     db msb($)       ; not supported - use high() instead

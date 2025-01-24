@@ -17,6 +17,7 @@ SIMPLEPAD: MACRO addr ; macroname MACRO param format is supported (label must be
     ORG $100        ; ORG on its own will not align code with position in memory
 
 START:
+    ld de,bc        ; successfully translates to ld d,b followed by ld e,c [50,59]
     jp END
 
     db high($)      ; high byte of the current PC

@@ -25,26 +25,27 @@ fail.asm(14): error: Label not found: start
 17    0100                                  ; the following will not assemble to $100 in _fail.bin / _fail.hex
 18    0100
 19    0100              START:
-fail.asm(20): error: Label not found: END
-20    0100 C3 00 00         jp END
-21    0103
-fail.asm(22): error: Label not found: msb
-fail.asm(22): error: Unexpected: ($)
-22    0103 00               db msb($)       ; not supported - use high() instead
-fail.asm(23): error: Label not found: lsb
+20    0100 50 59            ld de,bc
+fail.asm(21): error: Label not found: END
+21    0102 C3 00 00         jp END
+22    0105
+fail.asm(23): error: Label not found: msb
 fail.asm(23): error: Unexpected: ($)
-23    0104 00               db lsb($)       ; not supported - use low() instead
-24    0105
-fail.asm(25): error: Unrecognized instruction: cstr "foo\n"
-25    0105                  cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
-26    0105
-27    0105 00 00 00...      align $100
-28    0200
-fail.asm(29): error: Unrecognized instruction: included.asm
-29    0200              .include included.asm   ; by default directives cannot be put at the start of a line so this will fail.
-30    0200                                      ; use the --dirbol command switch to make this acceptable
-31    0200
-32    0200                  ORG $300            ; ORG on its own will not align code with position in memory
-33    0300
-34    0300                END
+23    0105 00               db msb($)       ; not supported - use high() instead
+fail.asm(24): error: Label not found: lsb
+fail.asm(24): error: Unexpected: ($)
+24    0106 00               db lsb($)       ; not supported - use low() instead
+25    0107
+fail.asm(26): error: Unrecognized instruction: cstr "foo\n"
+26    0107                  cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
+27    0107
+28    0107 00 00 00...      align $100
+29    0200
+fail.asm(30): error: Unrecognized instruction: included.asm
+30    0200              .include included.asm   ; by default directives cannot be put at the start of a line so this will fail.
+31    0200                                      ; use the --dirbol command switch to make this acceptable
+32    0200
+33    0200                  ORG $300            ; ORG on its own will not align code with position in memory
+34    0300
+35    0300                END
 # file closed: fail.asm
