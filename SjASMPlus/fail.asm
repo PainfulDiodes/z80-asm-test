@@ -1,5 +1,12 @@
     output _fail.bin
 
+    MACRO PADORG,addr   ; space must separate macro name from comma-delimited arguments
+         IF $ < addr
+         BLOCK addr-$
+         ENDIF
+         ORG addr
+    ENDM        
+
     jp START
 
     ORG $100        ; ORG on its own will not align code with position in memory

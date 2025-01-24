@@ -1,28 +1,41 @@
+fail.asm(4): warning[fwdref]: forward reference of symbol: IF $ < addr
+fail.asm(4): warning[fwdref]: forward reference of symbol: IF $ < addr
 # file opened: fail.asm
  1    0000                  output _fail.bin
  2    0000
- 3    0000 C3 00 01         jp START
- 4    0003
- 5    0003                  ORG $100        ; ORG on its own will not align code with position in memory
- 6    0100                                  ; the following will not assemble to $100 in _fail.bin / _fail.hex
- 7    0100
- 8    0100              START:
- 9    0100 76               halt
-10    0101
-fail.asm(11): error: Label not found: msb
-fail.asm(11): error: Unexpected: ($)
-11    0101 00               db msb($)       ; not supported - use high() instead
-fail.asm(12): error: Label not found: lsb
-fail.asm(12): error: Unexpected: ($)
-12    0102 00               db lsb($)       ; not supported - use low() instead
-13    0103
-fail.asm(14): error: Unrecognized instruction: cstr "foo"
-14    0103                  cstr "foo"      ; cstr not recognised for c-style strings - use db str,0
-15    0103
-16    0103 00 00 00...      align $100
-17    0200
-fail.asm(18): error: Unrecognized instruction: included.asm
-18    0200              .include included.asm   ; by default directives cannot be put at the start of a line so this will fail.
-19    0200                                      ; use the --dirbol command switch to make this acceptable
-20    0200
+fail.asm(3): error: [MACRO] Illegal macroname:  PADORG,addr
+ 3    0000                  MACRO PADORG,addr   ; space must separate macro name from comma-delimited arguments
+fail.asm(4): error: Label not found: addr
+ 4    0000                       IF $ < addr
+ 5    0000 ~                     BLOCK addr-$
+ 6    0000                       ENDIF
+fail.asm(7): error: Label not found: addr
+ 7    0000                       ORG addr
+fail.asm(8): error: [ENDM] End macro without macro
+ 8    0000                  ENDM
+ 9    0000
+10    0000 C3 00 01         jp START
+11    0003
+12    0003                  ORG $100        ; ORG on its own will not align code with position in memory
+13    0100                                  ; the following will not assemble to $100 in _fail.bin / _fail.hex
+14    0100
+15    0100              START:
+16    0100 76               halt
+17    0101
+fail.asm(18): error: Label not found: msb
+fail.asm(18): error: Unexpected: ($)
+18    0101 00               db msb($)       ; not supported - use high() instead
+fail.asm(19): error: Label not found: lsb
+fail.asm(19): error: Unexpected: ($)
+19    0102 00               db lsb($)       ; not supported - use low() instead
+20    0103
+fail.asm(21): error: Unrecognized instruction: cstr "foo"
+21    0103                  cstr "foo"      ; cstr not recognised for c-style strings - use db str,0
+22    0103
+23    0103 00 00 00...      align $100
+24    0200
+fail.asm(25): error: Unrecognized instruction: included.asm
+25    0200              .include included.asm   ; by default directives cannot be put at the start of a line so this will fail.
+26    0200                                      ; use the --dirbol command switch to make this acceptable
+27    0200
 # file closed: fail.asm

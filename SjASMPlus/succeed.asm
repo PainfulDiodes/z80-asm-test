@@ -1,8 +1,15 @@
     output _succeed.bin
 
+    MACRO PADORG addr
+         IF $ < addr
+         BLOCK addr-$
+         ENDIF
+         ORG addr
+    ENDM        
+
     jp START
 
-    BLOCK $100-$    ; BLOCK is needed to pad out memory (ALIGN might also be used)
+    PADORG $100     ; BLOCK is needed to pad out memory (ALIGN might also be used)
     ORG $100        ; ORG on its own will not align code with position in memory
 
 START:

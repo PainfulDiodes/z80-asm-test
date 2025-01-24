@@ -1,22 +1,33 @@
 # file opened: succeed.asm
  1    0000                  output _succeed.bin
  2    0000
- 3    0000 C3 00 01         jp START
- 4    0003
- 5    0003 00 00 00...      BLOCK $100-$    ; BLOCK is needed to pad out memory (ALIGN might also be used)
- 6    0100                  ORG $100        ; ORG on its own will not align code with position in memory
- 7    0100
- 8    0100              START:
- 9    0100 76               halt
-10    0101
-11    0101 01               db high($)      ; high byte of the current PC
-12    0102 02               db low($)       ; low byte of the current PC
-13    0103
-14    0103 66 6F 6F 00      db "foo",0      ; c-style strings using DB
-15    0107
-16    0107 00 00 00...      align $100      ; pad to beginning of next memory page
-17    0200
-18    0200                  .include included.asm       ; directives can start with a . (or not)
+ 3    0000                  MACRO PADORG addr
+ 4    0000 ~                     IF $ < addr
+ 5    0000 ~                     BLOCK addr-$
+ 6    0000 ~                     ENDIF
+ 7    0000 ~                     ORG addr
+ 8    0000                  ENDM
+ 9    0000
+10    0000 C3 00 01         jp START
+11    0003
+12    0003                  PADORG $100     ; BLOCK is needed to pad out memory (ALIGN might also be used)
+12    0003             >         IF $ < $100
+12    0003 00 00 00... >         BLOCK $100-$
+12    0100             >         ENDIF
+12    0100             >         ORG $100
+13    0100                  ORG $100        ; ORG on its own will not align code with position in memory
+14    0100
+15    0100              START:
+16    0100 76               halt
+17    0101
+18    0101 01               db high($)      ; high byte of the current PC
+19    0102 02               db low($)       ; low byte of the current PC
+20    0103
+21    0103 66 6F 6F 00      db "foo",0      ; c-style strings using DB
+22    0107
+23    0107 00 00 00...      align $100      ; pad to beginning of next memory page
+24    0200
+25    0200                  .include included.asm       ; directives can start with a . (or not)
 # file opened: included.asm
  1+   0200 62 61 72 00      DB "bar",0
 # file closed: included.asm
