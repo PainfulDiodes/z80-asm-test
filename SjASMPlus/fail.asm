@@ -13,7 +13,7 @@ SIMPLEPAD: MACRO addr
 
     jp start        ; labels are case-sensitive
 
-    ORG $100        ; ORG on its own will not align code with position in memory
+    ORG $100        ; ORG will not align code with position in memory
                     ; the following will not assemble to $100 in _fail.bin / _fail.hex
 
 START:
@@ -30,7 +30,7 @@ START:
 .include included.asm   ; by default directives cannot be put at the start of a line so this will fail. 
                         ; use the --dirbol command switch to make this acceptable
 
-    ORG $300            ; ORG on its own will not align code with position in memory
+    ORG $300            ; ORG will not align code with position in memory
 
   END:                  ; labels must generally be placed at the start of the line
     halt

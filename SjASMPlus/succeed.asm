@@ -14,7 +14,6 @@ SIMPLEPAD: MACRO addr ; macroname MACRO param format is supported (label must be
     jp START
 
     PADORG $100     ; BLOCK is needed to pad out memory (ALIGN might also be used)
-    ORG $100        ; ORG on its own will not align code with position in memory
 
 START:
     ld de,bc        ; successfully translates to ld d,b followed by ld e,c [50,59]
@@ -29,8 +28,7 @@ START:
 
     .include included.asm       ; directives can start with a . (or not)
 
-    SIMPLEPAD $300     ; BLOCK is needed to pad out memory (ALIGN might also be used)
-    ORG $300        ; ORG on its own will not align code with position in memory, but multiple orgs are allowed
+    SIMPLEPAD $300     ; BLOCK is needed to pad out memory
 
 END:
     halt

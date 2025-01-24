@@ -21,7 +21,7 @@ fail.asm(8): error: [ENDM] End macro without macro
 fail.asm(14): error: Label not found: start
 14    0000 C3 00 00         jp start        ; labels are case-sensitive
 15    0003
-16    0003                  ORG $100        ; ORG on its own will not align code with position in memory
+16    0003                  ORG $100        ; ORG will not align code with position in memory
 17    0100                                  ; the following will not assemble to $100 in _fail.bin / _fail.hex
 18    0100
 19    0100              START:
@@ -45,7 +45,7 @@ fail.asm(30): error: Unrecognized instruction: included.asm
 30    0200              .include included.asm   ; by default directives cannot be put at the start of a line so this will fail.
 31    0200                                      ; use the --dirbol command switch to make this acceptable
 32    0200
-33    0200                  ORG $300            ; ORG on its own will not align code with position in memory
+33    0200                  ORG $300            ; ORG will not align code with position in memory
 34    0300
 35    0300                END
 # file closed: fail.asm
