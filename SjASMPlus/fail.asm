@@ -25,5 +25,7 @@ START:
 .include included.asm   ; by default directives cannot be put at the start of a line so this will fail. 
                         ; use the --dirbol command switch to make this acceptable
 
+    ORG $300            ; ORG on its own will not align code with position in memory
+
   END:                  ; labels must generally be placed at the start of the line
     halt

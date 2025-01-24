@@ -18,7 +18,7 @@
 13    0100                  ORG $100        ; ORG on its own will not align code with position in memory
 14    0100
 15    0100              START:
-16    0100 C3 04 02         jp END
+16    0100 C3 00 03         jp END
 17    0103
 18    0103 01               db high($)      ; high byte of the current PC
 19    0104 04               db low($)       ; low byte of the current PC
@@ -32,6 +32,13 @@
  1+   0200 62 61 72 00      DB "bar",0
 # file closed: included.asm
 26    0204
-27    0204              END:
-28    0204 76               halt
+27    0204                  PADORG $300     ; BLOCK is needed to pad out memory (ALIGN might also be used)
+27    0204             >         IF $ < $300
+27    0204 00 00 00... >         BLOCK $300-$
+27    0300             >         ENDIF
+27    0300             >         ORG $300
+28    0300                  ORG $300        ; ORG on its own will not align code with position in memory
+29    0300
+30    0300              END:
+31    0300 76               halt
 # file closed: succeed.asm

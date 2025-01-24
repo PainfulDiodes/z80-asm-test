@@ -40,5 +40,7 @@ fail.asm(25): error: Unrecognized instruction: included.asm
 25    0200              .include included.asm   ; by default directives cannot be put at the start of a line so this will fail.
 26    0200                                      ; use the --dirbol command switch to make this acceptable
 27    0200
-28    0200                END
+28    0200                  ORG $300        ; ORG on its own will not align code with position in memory
+29    0300
+30    0300                END
 # file closed: fail.asm

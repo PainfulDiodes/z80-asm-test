@@ -24,5 +24,8 @@ START:
 
     .include included.asm       ; directives can start with a . (or not)
 
+    PADORG $300     ; BLOCK is needed to pad out memory (ALIGN might also be used)
+    ORG $300        ; ORG on its own will not align code with position in memory, but multiple orgs are allowed
+
 END:
     halt
