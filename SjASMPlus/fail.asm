@@ -23,6 +23,8 @@ START:
     db msb($)       ; not supported - use high() instead
     db lsb($)       ; not supported - use low() instead
 
+    align $100
+
     cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
 
     align $100
@@ -30,7 +32,7 @@ START:
 .include included.asm   ; by default directives cannot be put at the start of a line so this will fail. 
                         ; use the --dirbol command switch to make this acceptable
 
-    ORG $300            ; ORG will not align code with position in memory
+    ORG $400            ; ORG will not align code with position in memory
 
   END:                  ; labels must generally be placed at the start of the line
     halt

@@ -22,13 +22,15 @@ START:
     db high($)      ; high byte of the current PC
     db low($)       ; low byte of the current PC
 
+    align $100      ; pad to beginning of next memory page
+
     db "foo\n",0      ; c-style strings using DB, escaped control characters allowed
 
     align $100      ; pad to beginning of next memory page
 
     .include included.asm       ; directives can start with a . (or not)
 
-    SIMPLEPAD $300     ; BLOCK is needed to pad out memory
+    SIMPLEPAD $400     ; BLOCK is needed to pad out memory
 
 END:
     halt

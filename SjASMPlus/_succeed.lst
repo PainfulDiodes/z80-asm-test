@@ -22,24 +22,26 @@
 17    0100
 18    0100              START:
 19    0100 50 59            ld de,bc        ; successfully translates to ld d,b followed by ld e,c [50,59]
-20    0102 C3 00 03         jp END
+20    0102 C3 00 04         jp END
 21    0105
 22    0105 01               db high($)      ; high byte of the current PC
 23    0106 06               db low($)       ; low byte of the current PC
 24    0107
-25    0107 66 6F 6F 0A      db "foo\n",0      ; c-style strings using DB, escaped control characters allowed
-25    010B 00
-26    010C
-27    010C 00 00 00...      align $100      ; pad to beginning of next memory page
-28    0200
-29    0200                  .include included.asm       ; directives can start with a . (or not)
+25    0107 00 00 00...      align $100      ; pad to beginning of next memory page
+26    0200
+27    0200 66 6F 6F 0A      db "foo\n",0      ; c-style strings using DB, escaped control characters allowed
+27    0204 00
+28    0205
+29    0205 00 00 00...      align $100      ; pad to beginning of next memory page
+30    0300
+31    0300                  .include included.asm       ; directives can start with a . (or not)
 # file opened: included.asm
- 1+   0200 62 61 72 00      DB "bar",0
+ 1+   0300 62 61 72 00      DB "bar",0
 # file closed: included.asm
-30    0204
-31    0204                  SIMPLEPAD $300     ; BLOCK is needed to pad out memory
-31    0204 00 00 00... >        BLOCK $300-$
-32    0300
-33    0300              END:
-34    0300 76               halt
+32    0304
+33    0304                  SIMPLEPAD $400     ; BLOCK is needed to pad out memory
+33    0304 00 00 00... >        BLOCK $400-$
+34    0400
+35    0400              END:
+36    0400 76               halt
 # file closed: succeed.asm
