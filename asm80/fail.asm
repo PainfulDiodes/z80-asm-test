@@ -1,8 +1,8 @@
-    .MACRO myorg addr ; macro parameters need to be separated from the name by a comma
+    .MACRO myorg addr   ; macro parameters need to be separated from the name by a comma
         org addr
     .ENDM
 
-    MACRO myorg2,addr ; macro/endm need to start with a .
+    MACRO myorg2,addr   ; macro/endm need to start with a .
         org addr
     ENDM
 
@@ -14,12 +14,12 @@ START:
     ld de,bc
     jp END
 
-    db msb($)
-    db lsb($)
+    db high($)          ; high not recognised - use msb
+    db low($)           ; low not recognised - use lsb
 
     .align $100
 
-    cstr("foo\n")  ; cstr needs to start with a .
+    cstr("foo\n")       ; cstr needs to start with a .
 
     myorg $300
 
