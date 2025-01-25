@@ -1,0 +1,65 @@
+fail.asm:
+     1  0000  c30300                jp START
+     2                          
+     3                              ORG $100        ; ORG will not align code with position in memory
+                                      + ORG 256
+     4                          
+     5                          START:
+     6  0003  5059                  ld de,bc
+     7  0005  c30001                jp END
+     8                          
+     9                              db high($)      ; high byte of the current PC - not recognised, use an expression
+                                      + db high($)
+    10                              db msb($)       ; high byte of the current PC - not recognised, use an expression
+                                      + db msb($)
+    11                              db low($)       ; low byte of the current PC - not recognised, use an expression
+                                      + db low($)
+    12                              db lsb($)       ; low byte of the current PC - not recognised, use an expression
+                                      + db lsb($)
+    13                          
+    14                              cstr("foo\n")   ; cstr not recognised for c-style strings - use db str,0
+                                      + cstr("foo\n")
+    15                          
+    16                              align $100
+        0008  0000000000000000        + align 256
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+              0000000000000000  
+    17                          
+    18                              .include included.asm       ; directives cannot start with a .
+                                      + .include included.asm
+    19                              include included.asm        ; include needs quotes
+    20                          
+    21                              ORG $300        ; error: ORG redefined
+                                      + ORG 768
+    22                          
+    23                          END:
+    24  0100  76                    halt
+    25                          
