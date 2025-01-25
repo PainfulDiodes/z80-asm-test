@@ -1,7 +1,7 @@
 # z80-asm-test
 ## Comparative Z80 Assembler Test
 
-I was interested in consistency / standards among Z80 cross-assemblers that could be built from source for MacOS or Linux, and within that category I wanted to compare several that for various reasons seemed most interesting to me:
+I was interested in consistency / standards among Z80 cross-assemblers that could be built from source for MacOS or Linux, and within that category I chose to compare several that for various reasons seemed  interesting to me:
 
 * [SjASMPlus](https://github.com/z00m128/sjasmplus) 
 * [z88dk-z80asm](https://github.com/z88dk/z88dk/wiki/Tool---z80asm)
@@ -24,7 +24,7 @@ asm80 and zmac will pad out memory with NULs when encountering an ORG directive 
 
 z88dk-z80asm doesn't accept multiple ORG directives in the same SECTION which seems to imply that it doesn't accept multiple ORG directives in the same file. It does however allow ALIGN directives which can be used to much the same effect.
 
-SjASMPlus allows multiple ORG directives, and these influence how instructions are assembled, but it does not automatically pad memory at an ORG directive. It does however support the use of ALIGN and also provides a BLOCK directive which can be used to pad ORG boundaries with more finesse than ALIGN.
+SjASMPlus allows multiple ORG directives, and these influence how instructions are assembled, but it does not automatically pad memory at an ORG directive. It does however support the use of ALIGN and also provides a BLOCK directive which can be used to pad ORG boundaries with slightly more control than ALIGN.
 
 ## 16-bit register loading pseudo-ops
 A pseudo-op such as:
