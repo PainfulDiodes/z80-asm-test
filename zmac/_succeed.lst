@@ -14,19 +14,19 @@
   14:     -	0105  01      	    db high($)      ; high byte of the current PC
   15:     -	0106  06      	    db low($)       ; low byte of the current PC
   16:				
-  17:     -	0200          	    org $200        ; org with padding
+  17:     -	0200          	    org $200        ; org pads memory
   18:				
   19:     -	0200  666F6F0A	    db "foo",$0a,0  ; c-style strings using DB, escaped control characters not recognised
 	              00
   20:				
   21:     -	        	    myorg $300      ; org with padding using macro
   22:				
-  23:				    .include included.asm       ; directives can start with a . (or not)
+  23:				    .include included.asm ; directives can start with a . (or not)
 **** included.asm ****
 **** succeed.asm ****
   24:     -	0300  62617200	    DB "bar",0
   25:				
-  26:     -	0400          	    org $400       ; org with padding
+  26:     -	0400          	    org $400         ; org with padding
   27:				
   28:     -	0400          	END:
 **** succeed.asm ****

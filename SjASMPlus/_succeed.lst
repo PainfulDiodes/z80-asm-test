@@ -29,17 +29,17 @@
 24    0107
 25    0107 00 00 00...      align $100      ; pad to beginning of next memory page
 26    0200
-27    0200 66 6F 6F 0A      db "foo\n",0      ; c-style strings using DB, escaped control characters allowed
+27    0200 66 6F 6F 0A      db "foo\n",0    ; c-style strings using DB, escaped control characters allowed
 27    0204 00
 28    0205
 29    0205 00 00 00...      align $100      ; pad to beginning of next memory page
 30    0300
-31    0300                  .include included.asm       ; directives can start with a . (or not)
+31    0300                  .include included.asm ; directives can start with a . (or not)
 # file opened: included.asm
  1+   0300 62 61 72 00      DB "bar",0
 # file closed: included.asm
 32    0304
-33    0304                  SIMPLEPAD $400     ; BLOCK is needed to pad out memory
+33    0304                  SIMPLEPAD $400
 33    0304 00 00 00... >        BLOCK $400-$
 34    0400
 35    0400              END:

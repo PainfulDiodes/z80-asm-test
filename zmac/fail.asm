@@ -15,7 +15,7 @@ START:
 
     align $100      ; align not recognised
 
-    cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
+    .cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
     db "foo\n",0      ; escaped control characters not interpreted (no error)
 
     align $100

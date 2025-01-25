@@ -8,17 +8,17 @@ fail.asm:
      6  0003  5059                  ld de,bc
      7  0005  c30001                jp END
      8                          
-     9                              db high($)      ; high byte of the current PC - not recognised, use an expression
+     9                              db high($)      ; hogh not recognised, use an expression
                                       + db high($)
-    10                              db msb($)       ; high byte of the current PC - not recognised, use an expression
+    10                              db msb($)       ; msb not recognised, use an expression
                                       + db msb($)
-    11                              db low($)       ; low byte of the current PC - not recognised, use an expression
+    11                              db low($)       ; low not recognised, use an expression
                                       + db low($)
-    12                              db lsb($)       ; low byte of the current PC - not recognised, use an expression
+    12                              db lsb($)       ; lsb not recognised, use an expression
                                       + db lsb($)
     13                          
-    14                              cstr("foo\n")   ; cstr not recognised for c-style strings - use db str,0
-                                      + cstr("foo\n")
+    14                              .cstr("foo\n")   ; cstr not recognised for c-style strings - use db str,0
+                                      + .cstr("foo\n")
     15                          
     16                              align $100
         0008  0000000000000000        + align 256

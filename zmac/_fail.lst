@@ -12,10 +12,10 @@ P Phase error - $0002 changed from $00 to $01
 F Syntax error
   11:   10+10	0100  C30B01  	    jp END
   12:				
-  13:     -	0103  00      	    db msb($)      ; high byte of the current PC - msb not recognised
+  13:     -	0103  00      	    db msb($)      ; msb not recognised
 F Syntax error
 U 'msb' Undeclared
-  14:     -	0104  00      	    db lsb($)      ; low byte of the current PC - lsb not recognised
+  14:     -	0104  00      	    db lsb($)      ; lsb not recognised
 F Syntax error
 U 'lsb' Undeclared
   15:				
@@ -23,12 +23,12 @@ U 'lsb' Undeclared
 F Syntax error
 M Mult. def. error
   17:				
-  18:     -	0105          	    cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
+  18:     -	0105          	    .cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
 F Syntax error
-  19:     -	0105  666F6F5C	    db "foo\n",0      ; escaped control characters not recognised
+  19:     -	0105  666F6F5C	    db "foo\n",0      ; escaped control characters not interpreted (no error)
 	              6E00
   20:				
-  21:     -	010B          	    align $100      ; align not recognised
+  21:     -	010B          	    align $100
 F Syntax error
 M Mult. def. error
   22:				
@@ -60,7 +60,7 @@ Error + Warning report:
 
 Symbol Table:
 
+.cstr            105      261
 END              10B      267
 START            100      256
 align            105      261
-cstr             105      261

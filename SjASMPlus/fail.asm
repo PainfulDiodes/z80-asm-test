@@ -25,7 +25,7 @@ START:
 
     align $100
 
-    cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
+    .cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
 
     align $100
 

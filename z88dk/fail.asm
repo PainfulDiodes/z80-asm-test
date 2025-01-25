@@ -11,7 +11,7 @@ START:
     db low($)       ; low not recognised, use an expression
     db lsb($)       ; lsb not recognised, use an expression
 
-    cstr("foo\n")   ; cstr not recognised for c-style strings - use db str,0
+    .cstr("foo\n")   ; cstr not recognised for c-style strings - use db str,0
 
     align $100
 
