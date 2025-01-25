@@ -46,7 +46,7 @@ z88dk-z80asm provides no functions for this, although it is easy enough to achie
     db ($00FF & $)      ; low byte of the current PC
 
 ## Strings
-asm80 provides a directive for C-style strings - terinated with a NUL:
+asm80 provides a directive for C-style strings - terminated with a NUL:
 
     .cstr("foo\n")  ; c-style strings
 
@@ -57,4 +57,17 @@ This is not accepted by the other assemblers, but it is trivial (and intuitive) 
 This also works on asm80 of course.  
 
 However, zmac does not interpret escape sequences: \n \r \b etc.
+
+## Macros
+asm80 seems peculiar in that it requires a comma between macro name and arguments:
+
+    .MACRO myorg,addr
+        org addr
+    .ENDM
+
+Rather than:
+
+    .MACRO myorg addr
+        org addr
+    .ENDM
 
