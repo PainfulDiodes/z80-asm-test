@@ -17,7 +17,7 @@ START:
 
     .cstr("foo\n")  ; c-style strings
 
-    myorg $300      ; multiple orgs
+    myOrg $300      ; multiple orgs, labels are case-insensitive
 
     .include included.asm
 

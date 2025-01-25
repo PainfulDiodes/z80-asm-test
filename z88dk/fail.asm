@@ -4,9 +4,9 @@
 
 START:
     ld de,bc
-    jp END
+    jp end          ; labels are case-sensitive fail.asm:7: error: undefined symbol: end   
 
-    db high($)      ; hogh not recognised, use an expression
+    db high($)      ; high not recognised, use an expression
     db msb($)       ; msb not recognised, use an expression
     db low($)       ; low not recognised, use an expression
     db lsb($)       ; lsb not recognised, use an expression

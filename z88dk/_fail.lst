@@ -6,9 +6,10 @@ fail.asm:
      4                          
      5                          START:
      6  0003  5059                  ld de,bc
-     7  0005  c30001                jp END
+     7                              jp end          ; labels are case-sensitive fail.asm:7: error: undefined symbol: end
+        0005  c30000                  + jp end
      8                          
-     9                              db high($)      ; hogh not recognised, use an expression
+     9                              db high($)      ; high not recognised, use an expression
                                       + db high($)
     10                              db msb($)       ; msb not recognised, use an expression
                                       + db msb($)

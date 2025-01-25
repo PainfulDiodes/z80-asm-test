@@ -9,7 +9,7 @@
    9:     -	0100          	START:
   10:   10+4	0100  50      	    ld d,b 
   11:   14+4	0101  59      	    ld e,c
-  12:   18+10	0102  C30004  	    jp END
+  12:   18+10	0102  C30004  	    jp end
   13:				
   14:     -	0105  01      	    db high($)      ; high byte of the current PC
   15:     -	0106  06      	    db low($)       ; low byte of the current PC
@@ -49,5 +49,5 @@ Statistics:
 
 Symbol Table:
 
-END              400      1024
 START            100      256
+end              400      1024

@@ -9,7 +9,7 @@
 START:
     ld d,b 
     ld e,c
-    jp END
+    jp end          ; labels are case-insensitive
 
     db high($)      ; high byte of the current PC
     db low($)       ; low byte of the current PC
