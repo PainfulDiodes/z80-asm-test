@@ -1,0 +1,66 @@
+   1:				    myorg MACRO addr
+   2:				        org addr
+   3:				    ENDM
+   4:				
+   5:    0+10	0000  C30001  	    jp START
+P Phase error - $0002 changed from $00 to $01
+   6:				
+   7:     -	0100          	    org $100
+   8:				
+   9:     -	0100          	START:
+  10:     -	0100          	    ld de,bc        ; fails to translate to ld d,b followed by ld e,c [50,59]
+F Syntax error
+  11:   10+10	0100  C30B01  	    jp END
+  12:				
+  13:     -	0103  00      	    db msb($)      ; high byte of the current PC - msb not recognised
+F Syntax error
+U 'msb' Undeclared
+  14:     -	0104  00      	    db lsb($)      ; low byte of the current PC - lsb not recognised
+F Syntax error
+U 'lsb' Undeclared
+  15:				
+  16:     -	0105          	    align $100      ; align not recognised
+F Syntax error
+M Mult. def. error
+  17:				
+  18:     -	0105          	    cstr "foo\n"      ; cstr not recognised for c-style strings - use db str,0
+F Syntax error
+  19:     -	0105  666F6F5C	    db "foo\n",0      ; escaped control characters not recognised
+	              6E00
+  20:				
+  21:     -	010B          	    align $100      ; align not recognised
+F Syntax error
+M Mult. def. error
+  22:				
+  23:     -	010B          	END:
+**** fail.asm ****
+  24:   20+4	010B  76      	    halt
+
+
+
+Error + Warning report:
+
+    11 errors
+     0 warnings
+     6 F -- Syntax error
+     2 M -- Mult. def. error
+     1 P -- Phase error
+     2 U -- Undeclared error
+
+     2	passes
+     0	jr promotions
+     4	symbols
+    15	bytes
+
+     0	macro calls
+    25	macro bytes
+     0	invented symbols
+
+
+
+Symbol Table:
+
+END              10B      267
+START            100      256
+align            105      261
+cstr             105      261
