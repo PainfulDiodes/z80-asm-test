@@ -83,7 +83,9 @@ Rather than:
 ## Labels, directives and formatting
 Labels are case-sensitive in SjASMPlus and z88dk-z80asm, but not in zmac and asm80.
 
-SjASMPlus generally expects labels at the start of a line, but may allow lines to start with directives by using a command line switch: --dirbol
+SjASMPlus generally expects labels at the start of a line, and does not allow lines to start with a directive - but this latter restriction can be relaxed by using a command line switch: --dirbol
+
+asm80 and z88dk-z80asm do not seem to mind about whitespace at the start of a line, zmac seems generally not to mind, although it objects to starting a line with an ORG directive (there may of course be other exceptions).
 
 SjASMPlus and zmac allow directives to begin with or without a "." 
 
