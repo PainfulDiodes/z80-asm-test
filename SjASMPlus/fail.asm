@@ -20,8 +20,8 @@ START:
     ld de,bc
     jp END
 
-    db msb($)       ; not supported - use high() instead
-    db lsb($)       ; not supported - use low() instead
+    db msb($)       ; msb not recognised - use high() instead
+    db lsb($)       ; lsb not recognised - use low() instead
 
     align $100
 

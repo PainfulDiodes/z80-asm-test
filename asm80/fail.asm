@@ -1,8 +1,8 @@
-    .MACRO myorg addr ; macro parameters need to be separated from name by acomme
+    .MACRO myorg addr ; macro parameters need to be separated from the name by a comma
         org addr
     .ENDM
 
-    MACRO myorg2,addr ; macro/endm require a .
+    MACRO myorg2,addr ; macro/endm need to start with a .
         org addr
     ENDM
 
@@ -11,19 +11,19 @@
     org $100
 
 START:
-    ld de,bc        ; successfully translates to ld d,b followed by ld e,c [50,59]
+    ld de,bc
     jp END
 
-    db msb($)       ; high byte of the current PC
-    db lsb($)       ; low byte of the current PC
+    db msb($)
+    db lsb($)
 
-    .align $100     ; pad to beginning of next memory page
+    .align $100
 
-    cstr("foo\n")  ; cstr requires a .
+    cstr("foo\n")  ; cstr needs to start with a .
 
-    myorg $300      ; multiple orgs. use of macro
+    myorg $300
 
-    include included.asm ; include requires a .
+    include included.asm ; include needs to start with a .
 
     org $400
 

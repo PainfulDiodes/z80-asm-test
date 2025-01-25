@@ -15,9 +15,9 @@ START:
 
     .align $100     ; pad to beginning of next memory page
 
-    .cstr("foo\n")  ; c-style strings, escaped control characters recognised
+    .cstr("foo\n")  ; c-style strings
 
-    myorg $300      ; multiple orgs. use of macro
+    myorg $300      ; multiple orgs
 
     .include included.asm
 

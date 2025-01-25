@@ -24,13 +24,13 @@ START:
 
     align $100      ; pad to beginning of next memory page
 
-    db "foo\n",0      ; c-style strings using DB, escaped control characters allowed
+    db "foo\n",0    ; c-style strings using DB, escaped control characters allowed
 
     align $100      ; pad to beginning of next memory page
 
-    .include included.asm       ; directives can start with a . (or not)
+    .include included.asm ; directives can start with a . (or not)
 
-    SIMPLEPAD $400     ; BLOCK is needed to pad out memory
+    SIMPLEPAD $400
 
 END:
     halt

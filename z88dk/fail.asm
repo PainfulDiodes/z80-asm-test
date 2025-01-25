@@ -6,10 +6,10 @@ START:
     ld de,bc
     jp END
 
-    db high($)      ; high byte of the current PC - not recognised, use an expression
-    db msb($)       ; high byte of the current PC - not recognised, use an expression
-    db low($)       ; low byte of the current PC - not recognised, use an expression
-    db lsb($)       ; low byte of the current PC - not recognised, use an expression
+    db high($)      ; hogh not recognised, use an expression
+    db msb($)       ; msb not recognised, use an expression
+    db low($)       ; low not recognised, use an expression
+    db lsb($)       ; lsb not recognised, use an expression
 
     cstr("foo\n")   ; cstr not recognised for c-style strings - use db str,0
 
